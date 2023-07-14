@@ -1,9 +1,7 @@
-import Image from 'next/image';
-
 export default function Home() {
   return (
-    <main>
-      <h1>Context API w/ Next.js</h1>
-    </main>
+    <div>
+      <h1 className='text-4xl font-bold'>Context API w/ Next.js</h1>
+    </div>
   );
 }
