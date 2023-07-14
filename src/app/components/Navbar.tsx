@@ -9,6 +9,7 @@ const Navbar = () => {
           <li>
             <Link href='/'>Home</Link>
           </li>
+          {/* hide dashboard page if user is not logged in */}
           <li>
             <Link href='/dashboard'>Dashboard</Link>
           </li>
