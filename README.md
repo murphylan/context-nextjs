@@ -10,7 +10,7 @@ To run this project locally, make sure you have the following dependencies insta
 
 Follow these steps to set up the project:
 ``` bash
-git clone <repository-url>
+git clone git@github.com:bwong-yh/context-nextjs.git
 cd context-nextjs
 npm install
 npm run dev
