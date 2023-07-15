@@ -1,10 +1,14 @@
 'use client';
 import React, { useState } from 'react';
 
-const Login = () => {
-  const [email, setEmail] = useState('billy@example.com');
-  const [password, setPassword] = useState('test1234');
+type Props = {
+  email: string;
+  password: string;
+  setEmail: (email: string) => void;
+  setPassword: (password: string) => void;
+};
 
+const Login = ({ email, password, setEmail, setPassword }: Props) => {
   return (
     <>
       <input

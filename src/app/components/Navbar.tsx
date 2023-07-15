@@ -3,12 +3,20 @@
 import Link from 'next/link';
 import React from 'react';
 import useAuth from '../hooks/useAuth';
+import { account } from '@/appwrite/config';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
   const auth = useAuth();
+  const router = useRouter();
 
   const handleLogout = async () => {
-    console.log('logout');
+    try {
+      await account.deleteSession('current');
+      router.push('/');
+    } catch (error: any) {
+      console.error(error);
+    }
   };
 
   return (

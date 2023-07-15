@@ -2,7 +2,7 @@
 import React, { Dispatch, createContext, useReducer } from 'react';
 
 type User = {
-  name: string;
+  name?: string;
   email: string;
 };
 
