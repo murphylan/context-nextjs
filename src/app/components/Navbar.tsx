@@ -13,6 +13,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await account.deleteSession('current');
+      auth.dispatch({ type: 'LOGOUT', payload: null });
       router.push('/');
     } catch (error: any) {
       console.error(error);
@@ -26,14 +27,16 @@ const Navbar = () => {
           <li>
             <Link href='/'>Home</Link>
           </li>
-          {auth.state.user && (
+          {auth.state.isLoggedIn && (
             <li>
               <Link href='/profile'>Profile</Link>
             </li>
           )}
         </ul>
 
-        {auth.state.user && <button onClick={handleLogout}>Logout</button>}
+        {auth.state.isLoggedIn && (
+          <button onClick={handleLogout}>Logout</button>
+        )}
       </div>
     </nav>
   );
