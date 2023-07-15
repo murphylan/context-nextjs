@@ -5,15 +5,8 @@ const Login = () => {
   const [email, setEmail] = useState('billy@example.com');
   const [password, setPassword] = useState('test1234');
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
-
   return (
-    <form
-      onSubmit={handleLogin}
-      className='border border-rose-700 w-96 flex flex-col gap-y-8 p-4 mx-auto my-8'
-    >
+    <>
       <input
         type='email'
         placeholder='Email'
@@ -31,7 +24,7 @@ const Login = () => {
       <button type='submit' className='font-bold text-rose-700'>
         Login
       </button>
-    </form>
+    </>
   );
 };
 

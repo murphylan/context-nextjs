@@ -2,9 +2,14 @@
 
 import Link from 'next/link';
 import React from 'react';
+import useAuth from '../hooks/useAuth';
 
 const Navbar = () => {
-  const handleLogout = async () => {};
+  const auth = useAuth();
+
+  const handleLogout = async () => {
+    console.log('logout');
+  };
 
   return (
     <nav className='bg-rose-700 text-white mb-4'>
@@ -13,13 +18,14 @@ const Navbar = () => {
           <li>
             <Link href='/'>Home</Link>
           </li>
-          {/* hide dashboard page if user is not logged in */}
-          <li>
-            <Link href='/dashboard'>Dashboard</Link>
-          </li>
+          {auth.state.user && (
+            <li>
+              <Link href='/profile'>Profile</Link>
+            </li>
+          )}
         </ul>
 
-        <button onClick={handleLogout}>Logout</button>
+        {auth.state.user && <button onClick={handleLogout}>Logout</button>}
       </div>
     </nav>
   );
