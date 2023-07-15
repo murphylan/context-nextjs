@@ -1,4 +1,5 @@
 'use client';
+
 import Login from './components/form/Login';
 import Signup from './components/form/Signup';
 
