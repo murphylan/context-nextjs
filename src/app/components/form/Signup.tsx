@@ -1,20 +1,27 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, MouseEventHandler } from 'react';
 
-const Signup = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+type Props = {
+  name: string;
+  email: string;
+  password: string;
+  setName: (name: string) => void;
+  setEmail: (email: string) => void;
+  setPassword: (password: string) => void;
+  setForm: () => void;
+};
 
-  const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
-
+const Signup = ({
+  name,
+  email,
+  password,
+  setName,
+  setEmail,
+  setPassword,
+  setForm,
+}: Props) => {
   return (
-    <form
-      onSubmit={handleSignup}
-      className='border border-rose-700 w-96 flex flex-col gap-y-8 p-4 mx-auto my-8'
-    >
+    <>
       <input
         type='text'
         placeholder='Name'
@@ -36,10 +43,20 @@ const Signup = () => {
         placeholder='Password'
         onChange={e => setPassword(e.target.value.trim())}
       />
-      <button type='submit' className='font-bold text-rose-700'>
+      <button
+        type='submit'
+        className='font-bold text-rose-700 border border-red-700 max-w-fit mx-auto py-1 px-4'
+      >
         Signup
       </button>
-    </form>
+      <p className='text-sm'>
+        Already have an account? Click{' '}
+        <button onClick={() => setForm()}>
+          <span className='font-bold text-red-700'>here</span>
+        </button>{' '}
+        to login!
+      </p>
+    </>
   );
 };
 

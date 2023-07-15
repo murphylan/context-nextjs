@@ -1,19 +1,18 @@
 'use client';
-import React, { useState } from 'react';
+import Link from 'next/link';
+import React, { MouseEventHandler, useState } from 'react';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+type Props = {
+  email: string;
+  password: string;
+  setEmail: (email: string) => void;
+  setPassword: (password: string) => void;
+  setForm: () => void;
+};
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
-
+const Login = ({ email, password, setEmail, setPassword, setForm }: Props) => {
   return (
-    <form
-      onSubmit={handleLogin}
-      className='border border-rose-700 w-96 flex flex-col gap-y-8 p-4 mx-auto my-8'
-    >
+    <>
       <input
         type='email'
         placeholder='Email'
@@ -28,10 +27,20 @@ const Login = () => {
         value={password}
         onChange={e => setPassword(e.target.value.trim())}
       />
-      <button type='submit' className='font-bold text-rose-700'>
+      <button
+        type='submit'
+        className='font-bold text-rose-700 border border-red-700 max-w-fit mx-auto py-1 px-4'
+      >
         Login
       </button>
-    </form>
+      <p className='text-sm'>
+        Click{' '}
+        <button onClick={() => setForm()}>
+          <span className='font-bold text-red-700'>here</span>
+        </button>{' '}
+        to register!
+      </p>
+    </>
   );
 };
 
