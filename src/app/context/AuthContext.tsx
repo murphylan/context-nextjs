@@ -12,7 +12,7 @@ type AuthState = {
 };
 
 type AuthAction = {
-  type: 'LOGIN' | 'LOGOUT';
+  type: 'LOGIN' | 'LOGOUT' | 'UPDATE';
   payload: User | null;
 };
 
@@ -24,7 +24,7 @@ const initialState = {
 const authReducer = (state: AuthState, action: AuthAction) => {
   const { type, payload } = action;
   switch (type) {
-    case 'LOGIN': {
+    case 'LOGIN' || 'UPDATE': {
       return {
         ...state,
         user: payload,
