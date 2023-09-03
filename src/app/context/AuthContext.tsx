@@ -1,5 +1,5 @@
 'use client';
-import React, { Dispatch, createContext, useReducer } from 'react';
+import React, { Dispatch, createContext, useCallback, useMemo, useReducer } from 'react';
 
 type User = {
   name?: string;
@@ -47,14 +47,25 @@ export const AuthContext = createContext<{
   dispatch: Dispatch<AuthAction>;
 }>({
   state: initialState,
-  dispatch: () => {},
+  dispatch: () => { },
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(authReducer, initialState);
+  const [state, internalDispatch] = useReducer(authReducer, initialState);
+
+  // 使用 useCallback 封装 internalDispatch，创建一个包装函数，接受一个 action 对象并调用内部的 dispatch
+  const dispatch = useCallback(
+    (action: AuthAction) => {
+      internalDispatch(action);
+    },
+    [internalDispatch]
+  );
+
+  // 使用 useMemo 封装上下文对象
+  const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
 
   return (
-    <AuthContext.Provider value={{ state, dispatch }}>
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );

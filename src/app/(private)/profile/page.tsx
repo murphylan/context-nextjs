@@ -1,5 +1,6 @@
 'use client';
-import { account } from '@/appwrite/config';
+
+import api from '@/appwrite/api';
 import React, { useEffect, useState } from 'react';
 import useAuth from '@/app/hooks/useAuth';
 
@@ -18,7 +19,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const getCurrentUser = async () => {
       try {
-        const response = await account.get();
+        const response = await api.getAccount();
         auth.dispatch({ type: 'UPDATE', payload: response });
         console.log(response);
         setUser({ ...response });

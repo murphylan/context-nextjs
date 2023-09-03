@@ -1,5 +1,5 @@
 import useAuth from '@/app/hooks/useAuth';
-import { account } from '@/appwrite/config';
+import api from '@/appwrite/api';
 import { ID } from 'appwrite';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -26,7 +26,7 @@ const FormLayout = ({ children, name, email, password, formType }: Props) => {
 
     try {
       if (formType === FormType.LOGIN) {
-        const response = await account.createEmailSession(email, password);
+        const response = await api.createSession(email, password);
         auth.dispatch({
           type: 'LOGIN',
           payload: { email: response.providerUid },
@@ -34,8 +34,7 @@ const FormLayout = ({ children, name, email, password, formType }: Props) => {
       }
 
       if (formType === FormType.SIGNUP) {
-        const response = await account.create(
-          ID.unique(),
+        const response = await api.createAccount(
           email,
           password,
           name

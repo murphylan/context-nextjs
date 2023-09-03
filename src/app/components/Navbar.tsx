@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import React from 'react';
 import useAuth from '../hooks/useAuth';
-import { account } from '@/appwrite/config';
+import api from '@/appwrite/api';
 import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await account.deleteSession('current');
+      await api.deleteCurrentSession();
       auth.dispatch({ type: 'LOGOUT', payload: null });
       router.push('/');
     } catch (error: any) {
