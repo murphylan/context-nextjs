@@ -16,7 +16,7 @@ type AuthAction = {
   payload: User | null;
 };
 
-const initialState = {
+const initialState: AuthState = {
   user: null,
   isLoggedIn: false,
 };
